@@ -7,7 +7,10 @@ import netlify from '@astrojs/netlify/edge-functions';
 // https://astro.build/config
 import vercel from '@astrojs/vercel/edge';
 
-const adapter = ci.NETLIFY ? netlify() : ci.VERCEL ? vercel(): undefined
+// https://astro.build/config
+import cloudflare from '@astrojs/cloudflare';
+
+const adapter = ci.NETLIFY ? netlify() : ci.VERCEL ? vercel(): cloudflare()
 
 // https://astro.build/config
 export default defineConfig({
