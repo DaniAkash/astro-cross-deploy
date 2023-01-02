@@ -1,19 +1,26 @@
-import { defineConfig } from 'astro/config';
-import ci from 'ci-info';
+import { defineConfig } from "astro/config";
+import ci from "ci-info";
 
 // https://astro.build/config
-import netlify from '@astrojs/netlify/edge-functions';
+import netlify from "@astrojs/netlify/edge-functions";
 
 // https://astro.build/config
-import vercel from '@astrojs/vercel/edge';
+import vercel from "@astrojs/vercel/edge";
 
 // https://astro.build/config
-import cloudflare from '@astrojs/cloudflare';
+import cloudflare from "@astrojs/cloudflare";
 
-const adapter = ci.NETLIFY ? netlify() : ci.VERCEL ? vercel(): cloudflare()
+const adapter =
+	process.env.NODE_VERSION === "14.18.0"
+		? cloudflare
+		: ci.NETLIFY
+		? netlify()
+		: ci.VERCEL
+		? vercel()
+		: undefined;
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
-  adapter,
+	output: "server",
+	adapter,
 });
