@@ -10,14 +10,9 @@ import vercel from "@astrojs/vercel/edge";
 // https://astro.build/config
 import cloudflare from "@astrojs/cloudflare";
 
-const adapter =
-	process.env.NODE_VERSION === "14.18.0"
-		? cloudflare
-		: ci.NETLIFY
-		? netlify()
-		: ci.VERCEL
-		? vercel()
-		: undefined;
+console.log(process.env.NODE_VERSION)
+
+const adapter = cloudflare()
 
 // https://astro.build/config
 export default defineConfig({
