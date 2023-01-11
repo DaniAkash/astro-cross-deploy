@@ -14,8 +14,10 @@ import vercel from "@astrojs/vercel/edge";
 import cloudflare from "@astrojs/cloudflare";
 
 const adapter =
+	// Using custom env to detect cloudflare
 	process.env.NODE_VERSION === "v14.18.0"
 		? cloudflare()
+		// deno build runs on github actions
 		: ci.GITHUB_ACTIONS
 		? deno()
 		: ci.NETLIFY
